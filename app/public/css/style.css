@@ -1,0 +1,91 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    padding: 20px;
+}
+
+table{
+    width: 100%;
+}
+
+th {
+    text-align: left;
+    padding: 15px 0;
+}
+
+.sprite {
+    background-image: url('../img/team-logos.png');
+    background-repeat: no-repeat;
+    display: block;
+}
+
+.sprite-ambri {
+    width: 32px;
+    height: 32px;
+    background-position: -5px -5px;
+}
+
+.sprite-bern {
+    width: 32px;
+    height: 32px;
+    background-position: -47px -5px;
+}
+
+.sprite-bienne {
+    width: 32px;
+    height: 32px;
+    background-position: -89px -5px;
+}
+
+.sprite-davos {
+    width: 32px;
+    height: 32px;
+    background-position: -5px -47px;
+}
+
+.sprite-fribourg {
+    width: 32px;
+    height: 32px;
+    background-position: -47px -47px;
+}
+
+.sprite-langnau {
+    width: 32px;
+    height: 32px;
+    background-position: -89px -47px;
+}
+
+.sprite-lausanne {
+    width: 32px;
+    height: 32px;
+    background-position: -5px -89px;
+}
+
+.sprite-lugano {
+    width: 32px;
+    height: 32px;
+    background-position: -47px -89px;
+}
+
+.sprite-rapperswil {
+    width: 32px;
+    height: 32px;
+    background-position: -89px -89px;
+}
+
+.sprite-servette {
+    width: 32px;
+    height: 32px;
+    background-position: -131px -5px;
+}
+
+.sprite-zsc {
+    width: 32px;
+    height: 32px;
+    background-position: -131px -47px;
+}
+
+.sprite-zug {
+    width: 32px;
+    height: 32px;
+    background-position: -131px -89px;
+}

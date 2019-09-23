@@ -1,0 +1,16 @@
+{
+    "player": "string",
+    "team": "image",
+    "position": "string",
+    "games": "integer",
+    "goalsTotal": "integer",
+    "goalsOt": "integer",
+    "assistsTotal": "integer",
+    "assistsOt": "integer",
+    "penalty": "integer",
+    "points": "integer",
+    "ptsPerGame": "float",
+    "price": "float",
+    "ptsPerM": "float",
+    "ptsCostPerGame": "float"
+}
