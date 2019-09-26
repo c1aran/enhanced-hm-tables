@@ -86,7 +86,7 @@ function json2table(jsonFile) {
             bodyRows += '</tr>';
         });
     
-        return '<div id="stats"><table><thead><tr>' + headerRow + '</tr></thead><tbody class="list">' + bodyRows + '</tbody></table></div>';
+        return '<div id="stats"><table id="playerTable"><thead><tr>' + headerRow + '</tr></thead><tbody class="list">' + bodyRows + '</tbody></table></div>';
 
     } else {
 
