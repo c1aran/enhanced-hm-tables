@@ -28,9 +28,3 @@ module.exports = async () => {
     })();  
     
 };
-
-function writeSuccess(err) {
-    // check if there is error
-    if (err) console.error(err);
-    else console.log('write success');
-  }
