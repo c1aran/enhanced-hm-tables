@@ -1,5 +1,8 @@
+'use strict'
+
 const express = require('express');
 const getTableData = require('../assets/scraper.js');
+const getSihfData = require('../assets/sihf-csv.js');
 const columnData = require('../data/columns.json');
 const columnTypes = require('../data/columns-type.json');
 const teamLogos = require('../data/team-logos.json');
@@ -12,7 +15,8 @@ router.get('/', function (req, res) {
 
     (async function main() {
         try {
-            await getTableData();
+            //await getTableData();
+            await getSihfData();
         } catch (err) {
             console.error(err);
         }

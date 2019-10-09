@@ -41,6 +41,5 @@ module.exports = async () => {
     } else {
         console.log('No Data was found.');
     }
-    
 
 };

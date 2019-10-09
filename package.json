@@ -1,17 +1,29 @@
 {
-    "name": "enhanced-hockey-manager-table",
-    "version": "0.1.0",
-    "description": "Simple Application that gives you a more useful table from HockeyManager.ch.",
-    "main": "app/app.js",
-    "scripts": {
-        "start": ""
-    },
-    "author": "c1aran",
-    "license": "MIT",
-    "dependencies": {
-        "ejs": "^2.6.1",
-        "express": "^4.16.3",
-        "fs": "0.0.1-security",
-        "puppeteer": "^1.20.0"
-    }
+  "name": "enhanced-hockey-manager-table",
+  "version": "0.1.0",
+  "description": "Simple Application that gives you a more useful table from HockeyManager.ch.",
+  "main": "app/app.js",
+  "scripts": {
+    "start": ""
+  },
+  "author": "c1aran",
+  "license": "MIT",
+  "dependencies": {
+    "csvtojson": "^2.0.10",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "fs": "0.0.1-security",
+    "https": "^1.0.0",
+    "puppeteer": "^1.20.0",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/c1aran/EnhancedHockeyManagerTables.git"
+  },
+  "bugs": {
+    "url": "https://github.com/c1aran/EnhancedHockeyManagerTables/issues"
+  },
+  "homepage": "https://github.com/c1aran/EnhancedHockeyManagerTables#readme"
 }
