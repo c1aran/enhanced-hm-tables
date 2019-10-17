@@ -13,6 +13,7 @@ module.exports = async () => {
     const table = await page.evaluate(
         () => Array.from(document.querySelectorAll('div.tab-pane:nth-child(1) > table:nth-child(1) tbody tr')) // get all the rows of the table
             .map(tableRow => ({ // map the contents of the rows
+                id: tableRow.querySelector('.playerName').innerText.split(' ').sort().toString(),
                 player: tableRow.querySelector('.playerName').innerText, // get the player name
                 team: tableRow.querySelector('.teamName').innerText, // get the team name
                 position: tableRow.querySelector('td:nth-of-type(5)').innerText, // get the position

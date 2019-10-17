@@ -52,6 +52,7 @@ const sihfData = [
 
 module.exports = async () => {
 
+    // array needed to pass all scraped data to merge function 'joinJsonArrays()'
     var funcArgs = [];  
 
     try {
@@ -60,10 +61,10 @@ module.exports = async () => {
     
             for (const item of sihfData) {          
 
-                // console.log(item.name);
-
+                // get csv data and convert it to a json array
                 const tempJsonData =  await request.get(item.url).pipe(csv(options));
 
+                // push json array to funcArgs array
                 funcArgs.push(tempJsonData);
                 
                 /* fs.writeFile(
@@ -80,21 +81,22 @@ module.exports = async () => {
         console.error(err);
     }
    
-    joinJsonObjects(funcArgs);
+    // merge scraped data into one json object
+    joinJsonArrays(funcArgs);
     
 };
 
-function joinJsonObjects() {
+function joinJsonArrays() {
 
     var idMap = {};
 
     const playerData = arguments[0]
 
     // Iterate over playerData
-    for(var i = 0; i < playerData.length; i++) {
+    for (var i = 0; i < playerData.length; i++) {
 
         // Iterate over individual playerData arrays
-        for(var j = 0; j < playerData[i].length; j++) {
+        for (var j = 0; j < playerData[i].length; j++) {
 
             var currentID = playerData[i][j]['Spieler'];
 
@@ -113,10 +115,17 @@ function joinJsonObjects() {
     // push properties of idMap into an array
     var mergedArray = [];
 
-    for(let property in idMap) {
-        mergedArray.push(idMap[property]);
+    for (let property in idMap) {
+        mergedArray.push(idMap[property]);        
     }
 
+    for (let obj of mergedArray) {
+        obj.id = obj.Spieler.split(' ').sort().toString();
+    }
+
+    console.log("Table SIHF Merged Length: " + mergedArray.length);
+
+    // Write the merged player data to a json file
     fs.writeFile(
         mergedFilePath, 
         JSON.stringify(mergedArray, null, 2),
