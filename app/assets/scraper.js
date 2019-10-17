@@ -36,7 +36,7 @@ module.exports = async () => {
         fs.writeFile(
             './app/data/table.json', 
             JSON.stringify(table, null, 2),
-            (err) => err ? console.error('Data not written to file!', err) : console.log('Data written to file!')
+            (err) => err ? console.error('HM Data not written to file!', err) : console.log('HM Data written to file!')
         );
     } else {
         console.log('No Data was found.');

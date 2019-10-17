@@ -2,7 +2,7 @@
 
 const express = require('express');
 const getTableData = require('../assets/scraper.js');
-const getSihfData = require('../assets/sihf-csv.js');
+const getSihfData = require('../assets/sihf-scraper.js');
 const columnData = require('../data/columns.json');
 const columnTypes = require('../data/columns-type.json');
 const teamLogos = require('../data/team-logos.json');
