@@ -1,7 +1,7 @@
 'use strict'
 
 const express = require('express');
-const tableData = require('./data/table.json');
+const tableData = require('./data/table-merged.json');
 const app = express();
 
 app.set('port', process.env.PORT || 3000);

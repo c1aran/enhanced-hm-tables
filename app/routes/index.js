@@ -37,7 +37,7 @@ function json2table(jsonFile) {
         var bodyRows = '';
     
         cols.map(function (col) {
-            headerRow += '<th class="sort ' + col + '" data-sort="' + col + '">' + getColumnName(col) + '</th>';
+            headerRow += '<th class="sort ' + col + '" data-sort="' + col + '">' + /*getColumnName(col)*/ col + '</th>';
         });
     
         jsonFile.map(function (row) {
