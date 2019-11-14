@@ -10,44 +10,35 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
     <script>
-        // /* Custom filtering function which will search data in column four between two values */
-        // $.fn.dataTable.ext.search.push(
+        /* Custom filtering function which will search data in column four between two values */
+        $.fn.dataTable.ext.search.push(
 
-        //     function( settings, data, dataIndex ) {
+            function( settings, data, dataIndex ) {
 
-        //         var pgpMin = parseInt( $('#pgpMin').val(), 10 );
-        //         var pgpMax = parseInt( $('#pgpMax').val(), 10 );
-        //         var pgp = parseFloat( data[10] ) || 0; // use data for the p/gp column
+                // var pgpMin = parseInt( $('#pgpMin').val(), 10 );
+                // var pgpMax = parseInt( $('#pgpMax').val(), 10 );
+                // var pgp = parseFloat( data[10] ) || 0; // use data for the p/gp column
 
-        //         var priceMin = parseInt( $('#priceMin').val(), 10 );
-        //         var priceMax = parseInt( $('#priceMax').val(), 10 );
-        //         var price = parseFloat( data[11] ) || 0; // use data for the price column
+                var priceMin = parseFloat( $('#priceMin').val() );
+                var priceMax = parseFloat( $('#priceMax').val() );
+                var price = parseFloat( data[12] ) || 0; // use data for the price column
        
-        //         if (
-        //             ( isNaN( priceMin ) && isNaN( priceMax ) ) ||
-        //             ( isNaN( priceMin ) && price <= priceMax ) ||
-        //             ( priceMin <= price && isNaN( priceMax ) ) ||
-        //             ( priceMin <= price && price <= priceMax )  ||
-        //             ( isNaN( pgpMin )   && isNaN( pgpMax ) ) ||
-        //             ( isNaN( pgpMin )   && pgp <= pgpMax ) ||
-        //             ( pgpMin <= pgp     && isNaN( pgpMax ) ) ||
-        //             ( pgpMin <= pgp     && pgp <= pgpMax ) 
-        //             )
-        //         {
-        //             return true;
-        //         }
-        //         return false;
-        //     }
-        // );
-
+                if (
+                    ( isNaN( priceMin ) && isNaN( priceMax ) ) ||
+                    ( isNaN( priceMin ) && price <= priceMax ) ||
+                    ( priceMin <= price && isNaN( priceMax ) ) ||
+                    ( priceMin <= price && price <= priceMax )  
+                    )
+                {
+                    return true;
+                }
+                return false;
+            }
+        );
+        
         $.extend( true, $.fn.dataTable.defaults, {
             "bPaginate": false,
         });
-        
-        // // Event listener to the two range filtering inputs to redraw on input
-        // $('#priceMin, #priceMax, #pgpMin, #pgpMax').keyup( function() {
-        //     table.draw();
-        // });
 
         $(document).ready(function() {
             var table = $('#playerTable').DataTable({
@@ -130,5 +121,23 @@
                 } );
             } );
 
+            
+            $('input.position-filter').on( 'keyup click', function () {
+                filterColumn( $(this).parents('tr').attr('data-column') );
+            } );
+
         });
+
+        // Event listener to the two range filtering inputs to redraw on input
+        $('#priceMin, #priceMax').keyup( function() {
+            table.draw();
+        });
+
+        function filterColumn () {
+            $('#playerTable').DataTable().column( 3 ).search(
+                $("input:radio[name=position]:checked").val()
+            ).draw();
+        }
+
+
     </script> 
