@@ -24,10 +24,10 @@ module.exports = async () => {
                 assistsOt: tableRow.querySelector('td:nth-of-type(8)').innerText.match(/\((\d+)\)/)[1], // get the assists scored in OT
                 penalty: tableRow.querySelector('td:nth-of-type(9)').innerText.match(/\d+/)[0], // get the penalty minutes
                 points: tableRow.querySelector('td:nth-of-type(10)').innerText.match(/^.*?(?=\()/)[0], // get the hockey manager points
-                ptsPerGame: '',
+                ptsPerGame: ((tableRow.querySelector('td:nth-of-type(10)').innerText.match(/^.*?(?=\()/)[0])/(tableRow.querySelector('td:nth-of-type(6)').innerText)).toFixed(2),
                 price: tableRow.querySelector('td:nth-of-type(11)').innerText.match(/\d+\.\d+/)[0], // get the price of the player
-                ptsPerM: '',
-                ptsCostPerGame: ''
+                ptsPerM: ((tableRow.querySelector('td:nth-of-type(10)').innerText.match(/^.*?(?=\()/)[0])/(tableRow.querySelector('td:nth-of-type(11)').innerText.match(/\d+\.\d+/)[0])).toFixed(2),
+                ptsCostPerGame: (((tableRow.querySelector('td:nth-of-type(10)').innerText.match(/^.*?(?=\()/)[0])/(tableRow.querySelector('td:nth-of-type(11)').innerText.match(/\d+\.\d+/)[0]))/(tableRow.querySelector('td:nth-of-type(6)').innerText)).toFixed(2)
             }))
     );
 

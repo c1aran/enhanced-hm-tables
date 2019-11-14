@@ -3,12 +3,132 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/normalize.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/fontawesome/css/all.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
     <link rel="stylesheet" href="/css/style.css">
     <script src="/js/jquery-3.4.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>    
-    <script src="/js/tablesorter.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
     <script>
+        // /* Custom filtering function which will search data in column four between two values */
+        // $.fn.dataTable.ext.search.push(
+
+        //     function( settings, data, dataIndex ) {
+
+        //         var pgpMin = parseInt( $('#pgpMin').val(), 10 );
+        //         var pgpMax = parseInt( $('#pgpMax').val(), 10 );
+        //         var pgp = parseFloat( data[10] ) || 0; // use data for the p/gp column
+
+        //         var priceMin = parseInt( $('#priceMin').val(), 10 );
+        //         var priceMax = parseInt( $('#priceMax').val(), 10 );
+        //         var price = parseFloat( data[11] ) || 0; // use data for the price column
+       
+        //         if (
+        //             ( isNaN( priceMin ) && isNaN( priceMax ) ) ||
+        //             ( isNaN( priceMin ) && price <= priceMax ) ||
+        //             ( priceMin <= price && isNaN( priceMax ) ) ||
+        //             ( priceMin <= price && price <= priceMax )  ||
+        //             ( isNaN( pgpMin )   && isNaN( pgpMax ) ) ||
+        //             ( isNaN( pgpMin )   && pgp <= pgpMax ) ||
+        //             ( pgpMin <= pgp     && isNaN( pgpMax ) ) ||
+        //             ( pgpMin <= pgp     && pgp <= pgpMax ) 
+        //             )
+        //         {
+        //             return true;
+        //         }
+        //         return false;
+        //     }
+        // );
+
+        $.extend( true, $.fn.dataTable.defaults, {
+            "bPaginate": false,
+        });
+        
+        // // Event listener to the two range filtering inputs to redraw on input
+        // $('#priceMin, #priceMax, #pgpMin, #pgpMax').keyup( function() {
+        //     table.draw();
+        // });
+
         $(document).ready(function() {
-            $('#playerTable').tablesorter();
+            var table = $('#playerTable').DataTable({
+                ajax: {
+                    url: '/data/table.json',
+                    dataSrc: ''
+                },
+                columns: [
+                    {
+                        "class":          "details-control",
+                        "orderable":      false,
+                        "data":           null,
+                        "defaultContent": ""
+                    },
+                    {data: 'player'},
+                    {data: 'team'},
+                    {data: 'position'},
+                    {data: 'games'},
+                    {data: 'goalsTotal'},
+                    {data: 'goalsOt'},
+                    {data: 'assistsTotal'},
+                    {data: 'assistsOt'},
+                    {data: 'penalty'},
+                    {data: 'points'},
+                    {data: 'ptsPerGame'},
+                    {data: 'price'},
+                    {data: 'ptsPerM'},
+                    {data: 'ptsCostPerGame'}
+                ],
+                "order": [[10, 'desc']]
+            });
+
+            function format ( d ) {
+
+                let info = d.info[0];
+                console.log(info);
+
+                let infoList = '<ul class="playerInfo">';
+
+                for (entry in info) {
+                    infoList += '<li>' + entry + ': ' + info[entry] + '</li>';
+                }
+
+                infoList += '</ul>';
+
+                return infoList;
+            }
+        
+            // Array to track the ids of the details displayed rows
+            var detailRows = [];
+            
+            $('#playerTable tbody').on( 'click', 'tr td.details-control', function () {
+    
+                var tr = $(this).closest('tr');
+                var row = table.row( tr );
+                var idx = $.inArray( tr.attr('id'), detailRows );
+
+                if ( row.child.isShown() ) {
+                    tr.removeClass( 'details' );
+                    row.child.hide();
+
+                    // Remove from the 'open' array
+                    detailRows.splice( idx, 1 );
+                }
+                else {
+                    tr.addClass( 'details' );
+                    row.child( format( row.data() ) ).show();
+
+                    // Add to the 'open' array
+                    if ( idx === -1 ) {
+                        detailRows.push( tr.attr('id') );
+                    }
+                }
+            } );
+
+            // On each draw, loop over the `detailRows` array and show any child rows
+            table.on( 'draw', function () {
+                $.each( detailRows, function ( i, id ) {
+                    $('#' + id + ' td.details-control').trigger( 'click' );
+                } );
+            } );
+
         });
     </script> 
