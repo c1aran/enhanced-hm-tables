@@ -1,3 +1,4 @@
+    <title>Enhanced Hockey Manager Table</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">    
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,14 +23,16 @@
                 var priceMin = parseFloat( $('#priceMin').val() );
                 var priceMax = parseFloat( $('#priceMax').val() );
                 var price = parseFloat( data[12] ) || 0; // use data for the price column
-       
+                var games = parseInt ( data[4], 10)
+
                 if (
+                    ( games > 0 ) && (
                     ( isNaN( priceMin ) && isNaN( priceMax ) ) ||
                     ( isNaN( priceMin ) && price <= priceMax ) ||
                     ( priceMin <= price && isNaN( priceMax ) ) ||
                     ( priceMin <= price && price <= priceMax )  
                     )
-                {
+                ) {
                     return true;
                 }
                 return false;
@@ -54,7 +57,10 @@
                         "defaultContent": ""
                     },
                     {data: 'player'},
-                    {data: 'team'},
+                    {
+                        data: 'team',
+                        type: 'string'
+                    },
                     {data: 'position'},
                     {data: 'games'},
                     {data: 'goalsTotal'},
@@ -63,7 +69,10 @@
                     {data: 'assistsOt'},
                     {data: 'penalty'},
                     {data: 'points'},
-                    {data: 'ptsPerGame'},
+                    {
+                        data: 'ptsPerGame',
+                        type: 'num'
+                    },
                     {data: 'price'},
                     {data: 'ptsPerM'},
                     {data: 'ptsCostPerGame'}
@@ -97,13 +106,15 @@
                 var idx = $.inArray( tr.attr('id'), detailRows );
 
                 if ( row.child.isShown() ) {
+
                     tr.removeClass( 'details' );
                     row.child.hide();
 
                     // Remove from the 'open' array
                     detailRows.splice( idx, 1 );
-                }
-                else {
+
+                } else {
+
                     tr.addClass( 'details' );
                     row.child( format( row.data() ) ).show();
 
@@ -123,7 +134,11 @@
 
             
             $('input.position-filter').on( 'keyup click', function () {
-                filterColumn( $(this).parents('tr').attr('data-column') );
+                filterPosition( $(this).parents('tr').attr('data-column') );
+            } );
+
+            $('select[name=team] option').on( 'keyup click', function () {
+                filterTeam( $(this).parents('tr').attr('data-column') );
             } );
 
         });
@@ -133,11 +148,15 @@
             table.draw();
         });
 
-        function filterColumn () {
+        function filterPosition () {
             $('#playerTable').DataTable().column( 3 ).search(
                 $("input:radio[name=position]:checked").val()
             ).draw();
         }
 
+        function filterTeam() {
+            let value = $("select[name=team] > option:selected").val();
+            $('#playerTable').DataTable().column( 2 ).search(value).draw();
+        }
 
     </script> 

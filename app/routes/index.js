@@ -14,14 +14,14 @@ router.get('/', function (req, res) {
     const tableData = req.app.get('appData');
     const htmlTable = json2table(tableData);
 
-    // (async function main() {
-    //     try {
-    //         await getTableData();
-    //         await getSihfData();
-    //     } catch (err) {
-    //         console.error(err);
-    //     }
-    // })();
+    (async function main() {
+        try {
+            await getTableData();
+            await getSihfData();
+        } catch (err) {
+            console.error(err);
+        }
+    })();
 
     res.render('index', {
         table: htmlTable
