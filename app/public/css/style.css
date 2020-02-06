@@ -42,6 +42,14 @@ i {
     margin: 0 auto;
 }
 
+.container {
+    max-width: none;
+}
+
+#filterbox {
+    margin-bottom: 20px;
+}
+
 /* Spalten */
 
 .id, .Spieler, .Team, .R, .Pos, .GP {

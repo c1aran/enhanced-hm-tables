@@ -18,26 +18,25 @@ const showColumns = JSON.parse(fs.readFileSync(showColumnsPath));
 // console.log(hmData);
 
 // joinJsonArrays(hmData, sihfData);
-mergeWithSimilarity(hmData, sihfData);
 
-function mergeWithSimilarity(hmArray, sihfArray) {
+module.exports = async () => {
 
     let playerIdIndex = [];
 
-    for (let i = 0; i < hmArray.length; i++) {
-        playerIdIndex[i] = hmArray[i].id;
-        hmArray[i]['info'] = [];
+    for (let i = 0; i < hmData.length; i++) {
+        playerIdIndex[i] = hmData[i].id;
+        hmData[i]['info'] = [];
     }
 
-    for (let i = 0; i < sihfArray.length; i++) {
+    for (let i = 0; i < sihfData.length; i++) {
 
-        let bestMatchResult = stringSimilarity.findBestMatch(sihfArray[i].id, playerIdIndex);
+        let bestMatchResult = stringSimilarity.findBestMatch(sihfData[i].id, playerIdIndex);
 
         if (bestMatchResult.bestMatch.rating > 0.6) {
 
             let index = bestMatchResult.bestMatchIndex;
 
-            hmArray[index]['info'].push(sihfArray[i]);
+            hmData[index]['info'].push(sihfData[i]);
         }
 
     }
@@ -45,11 +44,11 @@ function mergeWithSimilarity(hmArray, sihfArray) {
     // Write the merged player data to a json file
     fs.writeFile(
         mergedFilePath, 
-        JSON.stringify(hmArray, null, 2),
+        JSON.stringify(hmData, null, 2),
         (err) => err ? console.error('Merged Data not written to file!', err) : console.log('Merged Data written to file!')
     );
 
-    exportWantedData(hmArray);
+    exportWantedData(hmData);
 
 }
 
@@ -95,7 +94,7 @@ function exportWantedData(hmArray) {
      fs.writeFile(
         exportFilePath, 
         JSON.stringify(exportArray, null, 2),
-        (err) => err ? console.error('Merged Data not written to file!', err) : console.log('Merged Data written to file!')
+        (err) => err ? console.error('Export of merged data failed!', err) : console.log('Exported merged data to public folder!')
     );
 }
 

@@ -16,21 +16,36 @@
 
             function( settings, data, dataIndex ) {
 
-                // var pgpMin = parseInt( $('#pgpMin').val(), 10 );
-                // var pgpMax = parseInt( $('#pgpMax').val(), 10 );
-                // var pgp = parseFloat( data[10] ) || 0; // use data for the p/gp column
+                var pgpMin = parseFloat( $('#pgpMin').val() );
+                var pgpMax = parseFloat( $('#pgpMax').val() );
+                var pgp = parseFloat( data[11] ) || 0; // use data for the p/gp column
 
                 var priceMin = parseFloat( $('#priceMin').val() );
                 var priceMax = parseFloat( $('#priceMax').val() );
                 var price = parseFloat( data[12] ) || 0; // use data for the price column
+
+                var ptsMin = parseInt( $('#ptsMin').val(), 10 );
+                var ptsMax = parseInt( $('#ptsMax').val(), 10 );
+                var points = parseFloat( data[10] ) || 0;
+
                 var games = parseInt ( data[4], 10)
 
                 if (
-                    ( games > 0 ) && (
-                    ( isNaN( priceMin ) && isNaN( priceMax ) ) ||
-                    ( isNaN( priceMin ) && price <= priceMax ) ||
-                    ( priceMin <= price && isNaN( priceMax ) ) ||
-                    ( priceMin <= price && price <= priceMax )  
+                    ( games > 0 ) && (                        
+                        ( isNaN( priceMin ) && isNaN( priceMax ) ) ||
+                        ( isNaN( priceMin ) && price <= priceMax ) ||
+                        ( priceMin <= price && isNaN( priceMax ) ) ||
+                        ( priceMin <= price && price <= priceMax )
+                    ) && (
+                        ( isNaN( ptsMin ) && isNaN( ptsMax ) ) ||
+                        ( isNaN( ptsMin ) && points <= ptsMax ) ||
+                        ( ptsMin <= points && isNaN( ptsMax ) ) ||
+                        ( ptsMin <= points && points <= ptsMax ) 
+                    ) && (
+                        ( isNaN( pgpMin ) && isNaN( pgpMax ) ) ||
+                        ( isNaN( pgpMin ) && pgp <= pgpMax ) ||
+                        ( pgpMin <= pgp && isNaN( pgpMax ) ) ||
+                        ( pgpMin <= pgp && pgp <= pgpMax ) 
                     )
                 ) {
                     return true;
@@ -68,7 +83,10 @@
                     {data: 'assistsTotal'},
                     {data: 'assistsOt'},
                     {data: 'penalty'},
-                    {data: 'points'},
+                    {
+                        data: 'points',
+                        type: 'num'
+                    },
                     {
                         data: 'ptsPerGame',
                         type: 'num'
@@ -141,12 +159,16 @@
                 filterTeam( $(this).parents('tr').attr('data-column') );
             } );
 
-        });
+            $('#playerName').on('keyup', function(){
+                filterPlayer( $(this).parents('tr').attr('data-column') )
+            });
 
-        // Event listener to the two range filtering inputs to redraw on input
-        $('#priceMin, #priceMax').keyup( function() {
-            table.draw();
-        });
+            // Event listener to the two range filtering inputs to redraw on input
+            $('#priceMin, #priceMax, #ptsMin, #ptsMax, #pgpMin, #pgpMax').change( function() {
+                table.draw();
+            });
+
+        });        
 
         function filterPosition () {
             $('#playerTable').DataTable().column( 3 ).search(
@@ -157,6 +179,11 @@
         function filterTeam() {
             let value = $("select[name=team] > option:selected").val();
             $('#playerTable').DataTable().column( 2 ).search(value).draw();
+        }
+
+        function filterPlayer() {
+            let value = $("#playerName").val();
+            $('#playerTable').DataTable().column( 1 ).search(value).draw();
         }
 
     </script> 

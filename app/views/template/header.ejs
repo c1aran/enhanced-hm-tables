@@ -1,9 +1,15 @@
 <header>
     <h1>HockeyManager Table</h1>
 </header>
+<div class="request-buttons">
+    <button id="refreshData">Get latest Data</button>
+</div>
+<div class="response-info">
+
+</div>
 <div id="filterbox" class="container">
     <div class="row">
-        <div class="col-3">
+        <div class="col-2">
             <label>Position:</label>
             <fieldset>
                 <label for="posAll">All</label>
@@ -14,8 +20,10 @@
                 <input type="radio" class="position-filter" id="posDefense" name="position" value="D">
                 <label for="posGoal">G</label>
                 <input type="radio" class="position-filter" id="posGoal" name="position" value="G">
-            </fieldset>
-            <label>Team</label>
+            </fieldset>            
+        </div>
+        <div class="col-2">
+            <label>Team</label><br>
             <select name="team">
                 <option value="" selected></option>
                 <option value="amrbi">Ambri</option>
@@ -32,16 +40,24 @@
                 <option value="zsc">Zürich</option>
             </select>
         </div>
-        <div class="col-3">
+        <div class="col-2">
+            <label>Spieler</label><br>
+            <input type="text" id="playerName" name="Spielername">
+        </div>
+        <div class="col-2">
             <label>Price</label><br>
             <input type="number" id="priceMin" name="Price Min" step="0.5">
             <input type="number" id="priceMax" name="Price Max" step="0.5">
         </div>
-        <div class="col-3">
-            
+        <div class="col-2">
+            <label>Points</label><br>
+            <input type="number" id="ptsMin" name="Points Min" step="1">
+            <input type="number" id="ptsMax" name="Points Max" step="1">
         </div>
-        <div class="col-3">
-            
+        <div class="col-2">
+            <label>Points per Game</label><br>
+            <input type="number" id="pgpMin" name="P/GP Min" step="0.1">
+            <input type="number" id="pgpMax" name="P/GP Max" step="0.1">
         </div>
     </div>    
 </div>

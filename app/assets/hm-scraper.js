@@ -4,6 +4,7 @@ const puppeteer = require('puppeteer');
 const fs = require('fs');
 
 module.exports = async () => {
+
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     const url = 'https://hockeymanager.ch/playerPerfomancePage';
