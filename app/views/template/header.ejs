@@ -23,9 +23,9 @@
             </fieldset>            
         </div>
         <div class="col-2">
-            <label>Team</label><br>
+            <label>Team</label>
             <select name="team">
-                <option value="" selected></option>
+                <option value="" selected>Filter Team</option>
                 <option value="amrbi">Ambri</option>
                 <option value="bern">Bern</option>
                 <option value="bienne">Biel</option>
@@ -41,23 +41,23 @@
             </select>
         </div>
         <div class="col-2">
-            <label>Spieler</label><br>
-            <input type="text" id="playerName" name="Spielername">
+            <label>Spieler</label>
+            <input type="text" id="playerName" name="Spielername" placeholder="Spielername">
         </div>
         <div class="col-2">
-            <label>Price</label><br>
-            <input type="number" id="priceMin" name="Price Min" step="0.5">
-            <input type="number" id="priceMax" name="Price Max" step="0.5">
+            <label>Price</label>
+            <input type="number" class="min-max-input" id="priceMin" name="Price Min" step="0.5" placeholder="Price: Min">
+            <input type="number" class="min-max-input" id="priceMax" name="Price Max" step="0.5" placeholder="Price: Max">
         </div>
         <div class="col-2">
-            <label>Points</label><br>
-            <input type="number" id="ptsMin" name="Points Min" step="1">
-            <input type="number" id="ptsMax" name="Points Max" step="1">
+            <label>Points</label>
+            <input type="number" class="min-max-input" id="ptsMin" name="Points Min" step="1" placeholder="Points: Min">
+            <input type="number" class="min-max-input" id="ptsMax" name="Points Max" step="1" placeholder="Points: Max">
         </div>
         <div class="col-2">
-            <label>Points per Game</label><br>
-            <input type="number" id="pgpMin" name="P/GP Min" step="0.1">
-            <input type="number" id="pgpMax" name="P/GP Max" step="0.1">
+            <label>Points per Game</label>
+            <input type="number" class="min-max-input" id="pgpMin" name="P/GP Min" step="0.1" placeholder="Points: Min">
+            <input type="number" class="min-max-input" id="pgpMax" name="P/GP Max" step="0.1" placeholder="Points: Max">
         </div>
     </div>    
 </div>

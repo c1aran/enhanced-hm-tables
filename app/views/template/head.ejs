@@ -152,14 +152,17 @@
 
             
             $('input.position-filter').on( 'keyup click', function () {
+                console.log('Input: Position Filter');
                 filterPosition( $(this).parents('tr').attr('data-column') );
             } );
 
-            $('select[name=team] option').on( 'keyup click', function () {
+            $('select[name=team]').on( 'change', function () {
+                console.log('Input: Team Filter');
                 filterTeam( $(this).parents('tr').attr('data-column') );
             } );
 
             $('#playerName').on('keyup', function(){
+                console.log('Input: Player Name');
                 filterPlayer( $(this).parents('tr').attr('data-column') )
             });
 
