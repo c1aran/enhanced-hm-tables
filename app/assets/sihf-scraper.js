@@ -129,6 +129,6 @@ function joinJsonArrays() {
     fs.writeFile(
         mergedFilePath, 
         JSON.stringify(mergedArray, null, 2),
-        (err) => err ? console.error('SIHF Data not written to file!', err) : console.log('SIHF Data written to file!')
+        (err) => err ? console.error('SIHF Data not written to file!', err) : console.log('Data written to file: SIHF.ch')
     );
 }

@@ -45,14 +45,14 @@ module.exports = async () => {
     fs.writeFile(
         mergedFilePath, 
         JSON.stringify(hmData, null, 2),
-        (err) => err ? console.error('Merged Data not written to file!', err) : console.log('Merged Data written to file!')
+        (err) => err ? console.error('Merged Data not written to file!', err) : console.log('Data merge complete.')
     );
 
-    exportWantedData(hmData);
+    await exportWantedData(hmData);
 
 }
 
-function exportWantedData(hmArray) {
+async function exportWantedData(hmArray) {
     let exportArray = [];
 
     for (let i = 0; i < hmArray.length; i++) {
